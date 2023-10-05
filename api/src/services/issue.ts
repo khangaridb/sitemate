@@ -12,16 +12,16 @@ export class IssueService {
   }
 
   public async updateIssue(id: string, inputs: UpdateIssueInput): Promise<IssueType | null> {
-    const userId = new ObjectId(id);
+    const issueId = new ObjectId(id);
 
     const { title, description } = inputs;
 
-    const user = await IssueModel.findById(userId);
+    const issue = await IssueModel.findById(issueId);
 
-    if (!user) throw new Error("User not found");
+    if (!issue) throw new Error("User not found");
 
     await IssueModel.updateOne(
-      { _id: userId },
+      { _id: issueId },
       {
         $set: {
           title,
@@ -30,19 +30,23 @@ export class IssueService {
       }
     );
 
-    const updatedUser = await IssueModel.findOne(
-      { _id: userId },
+    const updatedIssue = await IssueModel.findOne(
+      { _id: issueId },
       {
         title: 1,
         description: 1,
       }
     );
 
-    return updatedUser;
+    return updatedIssue;
   }
 
   public async removeIssue(id: string) {
     return await IssueModel.findOneAndRemove({ _id: new ObjectId(id) });
+  }
+
+  public async getIssues(text?: string) {
+    return await IssueModel.find({});
   }
 }
 
