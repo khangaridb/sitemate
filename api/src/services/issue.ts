@@ -18,7 +18,7 @@ export class IssueService {
 
     const issue = await IssueModel.findById(issueId);
 
-    if (!issue) throw new Error("User not found");
+    if (!issue) throw new Error("Issue not found");
 
     await IssueModel.updateOne(
       { _id: issueId },
