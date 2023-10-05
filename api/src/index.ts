@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
-// import { connectDb } from "./mongoose";
+import { connectDb } from "./mongoose";
 import routes from "./controllers";
 
 dotenv.config();
@@ -10,7 +10,7 @@ const { PORT, NODE_ENV } = process.env;
 
 const app = express();
 
-// connectDb();
+connectDb();
 
 app.use(cors());
 

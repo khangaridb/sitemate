@@ -4,23 +4,25 @@ import { issueService } from "../services";
 
 const router = Router();
 
-router.use("/create", async (req: Request, res: Response, next: NextFunction) => {
+router.post("/create", async (req: Request, res: Response, next: NextFunction) => {
   const result = await issueService.createIssue({ ...req.body });
 
   return res.json({ result });
 });
 
-router.use("/:id", async (req: Request, res: Response) => {});
+router.get("/:id", async (req: Request, res: Response) => {});
 
-router.use("/update/:id", async (req: Request, res: Response) => {
+router.post("/update/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
+
+  console.log("ID", id);
 
   const result = await issueService.updateIssue(id, { ...req.body });
 
   return res.json({ result });
 });
 
-router.use("/remove/:id", async (req: Request, res: Response) => {
+router.post("/remove/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
 
   await issueService.removeIssue(id);
