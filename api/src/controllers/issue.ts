@@ -13,7 +13,7 @@ router.post("/create", async (req: Request, res: Response, next: NextFunction) =
 router.get("/list", async (req: Request, res: Response) => {
   const { text } = req.query;
 
-  const result = await issueService.getIssues();
+  const result = await issueService.getIssues(text as string);
 
   return res.json({ result });
 });

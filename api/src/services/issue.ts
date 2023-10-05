@@ -46,7 +46,17 @@ export class IssueService {
   }
 
   public async getIssues(text?: string) {
-    return await IssueModel.find({});
+    let query = {};
+
+    if (text) {
+      query = {
+        $text: {
+          $search: text,
+        },
+      };
+    }
+
+    return await IssueModel.find(query);
   }
 }
 

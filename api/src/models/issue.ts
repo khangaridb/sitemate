@@ -17,6 +17,9 @@ const schema = new mongoose.Schema<IssueType>(
   }
 );
 
+schema.index({ title: "text" });
+schema.index({ description: "text" });
+
 const IssueModel = mongoose.model<IssueType>(schemaName, schema);
 
 export default IssueModel;
